@@ -144,36 +144,38 @@ if __name__ == "__main__":
     main()
 ```
 
-### Part 1 : RANSAC
+### RANSAC Algorithm
 
 ---
 <p align="center">
-          <img width="600" height="600" src="media/ransac.svg">
+          <img width="600" height="600" src=".media/ransac.svg">
 </p>
 
 RANSAC parameters
 ```yaml
-viz_topic: /ransac_markers # Topic to publish the visualization markers
-trials: 10 # Number of trials to run (N in the RANSAC algorithm)
-distance_threshold: 0.1 # Distance below which a point is considered as an inlier (d_th in the RANSAC algorithm)
-remain_ratio: 0.05 # Ratio of the remaining points from the start of the trials (r_rem in the RANSAC algorithm)
+/ransac:
+  ros__parameters:
+    viz_topic: /ransac_markers # Topic to publish the visualization markers
+    trials: 10 # Number of trials to run (N in the RANSAC algorithm)
+    distance_threshold: 0.1 # Distance below which a point is considered as an inlier (d_th in the RANSAC algorithm)
+    remain_ratio: 0.05 # Ratio of the remaining points from the start of the trials (r_rem in the RANSAC algorithm)
 ```
 
 Your RANSAC node will
 - Subscribe to the `/scan` topic to receive `sensor_msgs/LaserScan` messages.
 - Process the incoming laser scan data using the RANSAC algorithm to extract a set of lines representing the scan
-- Publish the detected lines as visualization markers on the topic specified in the YAML configuration files
+- Publish the detected lines as visualization markers on the topic specified in the YAML configuration file
 
-The `ransac.launch` file should:
+The `ransac.launch.py` file should:
 - Start Stage 2 of the TurtleBot3 Gazebo simulation
-- Launch rviz with a custom configuration file to visualize the lines
+- Launch rviz2 with a custom configuration file to visualize the lines
 - Start the RANSAC node for line extraction
 
 
 
 
 
->**RANSAC is an iterative algorithm and thus can have slow implementations. You can check the rate of your marker publisher using `rostopic hz /ransac_markers`. You should be getting rates > 2Hz**
+>**RANSAC is an iterative algorithm and thus can have slow implementations. You can check the rate of your marker publisher using `ros2 topic hz /ransac_markers`. You should be getting rates > 2 Hz**
 
 
 ### Demonstration Video
@@ -190,7 +192,8 @@ Submit using the Github upload feature on [autolab](https://autolab.cse.buffalo.
 
 You will be graded on the following. Penalties are listed under each point, absolute values, w.r.t assignment total.
 
-1. Part 1 (RANSAC) [100%] 
-    1. If the simulation is not launched [-20%]
-    2. If your launch file doesn’t launch rviz with the correct config [-20%]
-    3. If there are consistently bad lines [-30%]
+    1. If your launch file launches the simulation [20%]
+    2. If your launch file launches rviz with the correct config [20%]
+    3. If markers are published [10%]
+    4. If the lines published are correct most of the time (i.e., without consistent bad lines) [40%]
+    5. If the rate >= 2 Hz [10%]
