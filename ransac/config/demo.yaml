@@ -1,0 +1,4 @@
+/demo:
+  ros__parameters:
+    viz_topic: /ransac_demo_markers # Topic to publish the visualization markers
+    line_list: "[[5,5,10,10],[-5,-5,-10,-10],[5,-5,10,-10],[-5,5,-10,10],[-2,2,2,2],[2,2,2,-2],[2,-2,-2,-2],[-2,-2,-2,2]]" # List of lines to draw

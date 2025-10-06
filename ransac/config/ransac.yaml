@@ -1,0 +1,6 @@
+/ransac:
+  ros__parameters:
+    viz_topic: /ransac_markers # Topic to publish the visualization markers
+    trials: 10 # Number of trials to run (N in the RANSAC algorithm)
+    distance_threshold: 0.1 # Distance below which a point is considered as an inlier (d_th in the RANSAC algorithm)
+    remain_ratio: 0.05 # Ratio of the remaining points from the start of the trials (r_rem in the RANSAC algorithm)
